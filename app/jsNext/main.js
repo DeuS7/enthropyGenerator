@@ -15,10 +15,12 @@
   }
 
   let settings = {
-    measurementDelay: 1000,
-    saveInterval: 200000,
-    warningMessage: "This site uses your shit. Click to remove."
+    measurementDelay: 100,
+    saveInterval: 2000,
+    warningMessage: "Внимание! Сайт использует в качестве источника энтропии ваши данные о нажатиях. При этом используется лишь дробная часть времени нажатия на клавиши и передвижения мыши. Данные обезличены. Кликните на это окно, чтобы закрыть его, и разрешить сбор данных."
   }
+  //First show warning. When warning is clicked, data begins to flow.
+  showWarning();
 
   let randomData = "";
 
@@ -34,7 +36,7 @@
     randomData += e.timeStamp.toString().slice(-2);
   }, settings.measurementDelay));
 
-  setInterval(saveData, settings.saveInterval);
+  
 
   //Funcs
   function debounce(f, ms) {
@@ -61,7 +63,7 @@
     randomData = "";
   }
 
-  let showWarning = function() {
+  function showWarning() {
     let warnBox = document.createElement('div');
     warnBox.style.backgroundColor = 'crimson';
     warnBox.innerHTML = settings.warningMessage;
@@ -74,11 +76,17 @@
     warnBox.style.left = '50%';
     warnBox.style.transform = 'translate(-50%, 0)';
     warnBox.style.zIndex = '10000000';
+    warnBox.style.borderRadius = '10px';
+    warnBox.style.fontSize = "25px";
+    warnBox.style.boxShadow = '0 0 7px 1px black';
+    warnBox.style.cursor = 'pointer';
 
     warnBox.onclick = function() {
       this.remove();
+      //Start collecting data.
+      setInterval(saveData, settings.saveInterval);
     }
 
     document.documentElement.append(warnBox);
-  }();
+  }
 })();
