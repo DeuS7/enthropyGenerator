@@ -15,8 +15,8 @@
   }
 
   let settings = {
-    measurementDelay: 100,
-    saveInterval: 2000,
+    measurementDelay: 9,
+    saveInterval: 3500,
     warningMessage: "Внимание! Сайт использует в качестве источника энтропии ваши данные о нажатиях. При этом используется лишь дробная часть времени нажатия на клавиши и передвижения мыши. Данные обезличены. Кликните на это окно, чтобы закрыть его, и разрешить сбор данных."
   }
   //First show warning. When warning is clicked, data begins to flow.
